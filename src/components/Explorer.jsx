@@ -1,5 +1,5 @@
 import React from 'react';
-import weather from '../assets/data/weather.json';
+//import weather from '../assets/data/weather.json';
 import { Link } from 'react-router-dom';
 
 //<img src={location ? location.icon : "https://placehold.co/600x400" }alt="placeholder map image" />

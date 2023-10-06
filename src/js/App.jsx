@@ -1,6 +1,6 @@
 import React from 'react';
-import 'src/css/App.css'
-import Explorer from 'src/components/Explorer.jsx';
+import './css/App.css'
+import Explorer from './components/Explorer.jsx';
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 import axios from 'axios';
 
