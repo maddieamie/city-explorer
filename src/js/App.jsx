@@ -1,35 +1,73 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React from 'react';
+import 'src/css/App.css'
+import Explorer from 'src/components/Explorer.jsx';
+import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
+import axios from 'axios';
+// Vites way of loading files from a .env file -> requires "VITE_" to be used at the beginning of your key
+const API_KEY = import.meta.env.VITE_LOCATIONIQ_API_KEY;
 
-function App() {
-  const [count, setCount] = useState(0)
+class App extends React.Component {
+  constructor() {
+    super();
+    this.state= {
+      searchQuery: '',
+      location: null,
+    }
+  }
 
-  return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+  setSearchQuery = (query) => {
+    this.setState({ searchQuery: query });
+  }
+
+  handleForm = (e) => {
+    console.log('Form Submitted');
+    e.preventDefault();
+    console.log(API_KEY);
+    axios.get(`https://us1.locationiq.com/v1/search?key=${API_KEY}&q=${this.state.searchQuery}&format=json`)
+      .then(response => {
+        console.log('SUCCESS: ', response.data);
+        this.setState({ location: response.data[0] });
+      }).catch(error => {
+        console.log('UGH OOOOH:', error);
+      });
+  }
+
+  handleChange = (e) => {
+    this.setState({ searchQuery: e.target.value });
+  }
+
+  render() {
+    // no JS statement can go here
+    // only JS expression are allowed in the return.
+    console.log('CITY EXPLORER', this.state);
+    return (
+      <>
+        <header>
+          <h1>Welcome to City Explorer!</h1>
+        </header>
+        {this.state.searchQuery
+          ? <Explorer 
+          API_KEY = {this.API_KEY} 
+          location = {this.location}
+                    />
+          : <p>Please Enter a location to see results.</p>
+        }
+        <BrowserRouter>
+          <form onSubmit={this.handleForm}>
+            <input placeholder="Enter City Name" type="text" name="city" onChange={this.handleChange} />
+            <button type='submit'>
+              Search
+              {/* <Link to="/search">Search!</Link> */}
+            </button>
+          </form>
+          <Routes>
+            <Route exact path="/search" element={<Explorer location={this.state.location} query={this.state.searchQuery} />} />
+            <Route path="/" element={<p>Please Enter a location to see results.</p>} />
+          </Routes>
+        </BrowserRouter>
+      </>
+    )
+  }
 }
 
 export default App

@@ -7,19 +7,23 @@ Currently, two official plugins are available:
 - [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
 - [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-# City Explorer Class Lab
+## City Explorer Class Lab
 
 **Author**: Maddie Lewis
 **Version**: 1.0.0 (increment the patch/fix version number if you make more commits past your first submission)
 
 ## Overview
+
 This is a React application that uses the Axios library to make user-initiated requests for data from a third-party API. I am using LocationIQ to make requests for this assignment. You can enter a location to see its latitude and longitude, as well as a map of the area. You could also check the weather at that location, as well as movies about the location. The application should provide feedback as the user interacts in the form of success and error messages.
+
 ## Getting Started
+
 <!-- What are the steps that a user must take in order to build this app on their own machine and get it running? -->
 
 ## Architecture
+
 <!-- Provide a detailed description of the application design. What technologies (languages, libraries, etc) you're using, and any other relevant design information. -->
-This app was built in Vite React App, with Axios.
+This app was built in Vite React App, with Axios. It also utilizes the React Bootstrap library.
 
 ## Change Log
 <!-- Use this area to document the iterative changes made to your application as each feature is successfully implemented. Use time stamps. Here's an example:
@@ -28,7 +32,7 @@ This app was built in Vite React App, with Axios.
 
 ## Credit and Collaborations
 <!-- Give credit (and a link) to other people or resources that helped you build this application. -->
-Thanks for the project parameters from CodeFellows. 
+Thanks for the project parameters from CodeFellows.
 
 ## Time Estimates
 
@@ -40,15 +44,19 @@ Estimate of time needed to complete: 2 hours
 
 Start time: 13:30
 
-Finish time: _____
+Finish time: 15:40
+
+Start time: 16:00
+
+Finish time: 
 
 Actual time needed to complete: _____
 
 ---
 
-Name of feature: Set up the App
+Name of feature: Locations
 
-Estimate of time needed to complete: _____
+Estimate of time needed to complete: 3 hours
 
 Start time: _____
 
