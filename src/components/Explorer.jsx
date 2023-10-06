@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 
 //<img src={location ? location.icon : "https://placehold.co/600x400" }alt="placeholder map image" />
 
+
+
 let API_KEY = this.props.API_KEY;
 
 class Explorer extends React.Component {
