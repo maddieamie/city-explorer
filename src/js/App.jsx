@@ -27,13 +27,12 @@ class App extends React.Component {
   handleForm = (e) => {
     console.log('Form Submitted');
     e.preventDefault();
-    console.log(API_KEY);
     axios.get(`https://us1.locationiq.com/v1/search?key=${API_KEY}&q=${this.state.searchQuery}&format=json`)
       .then(response => {
         console.log('SUCCESS: ', response.data);
         this.setState({ location: response.data[0] });
       }).catch(error => {
-        console.log('UGH OOOOH:', error);
+        console.log('Oops!:', error);
       });
   }
 
@@ -44,7 +43,7 @@ class App extends React.Component {
   render() {
     // no JS statement can go here
     // only JS expression are allowed in the return.
-    console.log('CITY EXPLORER', this.state);
+    
     return (
       <>
         <header>
@@ -53,7 +52,7 @@ class App extends React.Component {
         {this.state.searchQuery
           ? <Explorer 
           API_KEY = {this.API_KEY} 
-          location = {this.location}
+          location = {this.state.location}
                     />
           : <p>Please Enter a location to see results.</p>
         }
