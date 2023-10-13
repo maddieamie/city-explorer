@@ -1,46 +1,49 @@
-import React from 'react';
-//import weather from '../assets/data/weather.json';
-import { Link } from 'react-router-dom';
+import React from "react";
+import { Button, Container, Form } from "react-bootstrap";
+import axios from "axios";
 
-//<img src={location ? location.icon : "https://placehold.co/600x400" }alt="placeholder map image" />
-
-
-
-let API_KEY = this.props.API_KEY;
+let API = import.meta.env.VITE_LOCATIONIQ_API_KEY;
 
 class Explorer extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      displayContent: false,
+      searchQuery: '',
+      city: {}
+    }
+  }
+// yay 
+  handleSearch = async (e) => {
+    e.preventDefault();
+    let url = `https://us1.locationiq.com/v1/search?key=${API}&q=${this.state.searchQuery}&format=json`;
+    // console.log(url)
+    const response = await axios.get(url);
+    console.log(response.data)
+    
+    this.setState({ city: response.data[0], displayContent: true })
+  }
+
 
   render() {
-
-    let location = this.props;
-
-    let staticMapUrl = `https://maps.locationiq.com/v3/staticmap?key=${API_KEY}&center=${location.lat},${location.lon}$zoom=9`;
-
     return (
-      <main>
-        <Link to="/">Go Home</Link>
-        <section>
-          <h2>Maps</h2>
-          <p>{this.props.query}</p>
-          <p>City: {location ? location.display_name : 'No location set'}</p>
-          <p>URL FOR MAP: PLACEHOLDER</p>
-          <img src={location ? staticMapUrl : "https://placehold.co/600x400" }alt="placeholder map image" />
-        </section>
-        <section>
-          <ul>
-          {weather.data.map((dailyForcast, index) => (
-            <li key={index}>
-              <p>{dailyForcast.datetime}</p>
-              <p>{dailyForcast.temp}</p>
-            </li>
-          ))}
-          </ul>
-        </section>
-      </main>
+      <Container>
+        <Form onSubmit={this.handleSearch}>
+          <Form.Control onChange={(e) => this.setState({ searchQuery: e.target.value })} type="text" placeholder="Enter city...." />
+          <Button type='submit' >Explore!</Button>
+        </Form>
+
+        {Object.keys(this.state.city).length > 0 &&
+
+          <>
+            <p>{this.state.city.display_name}</p>
+            <p>Lat: {this.state.city.lat}, Lon: {this.state.city.lon}</p>
+          </>
+        }
+
+      </Container>
     )
   }
 }
-
-export const test = 'banana';
 
 export default Explorer;
