@@ -13,7 +13,7 @@ class Explorer extends React.Component {
       city: {}
     }
   }
-
+// yay 
   handleSearch = async (e) => {
     e.preventDefault();
     let url = `https://us1.locationiq.com/v1/search?key=${API}&q=${this.state.searchQuery}&format=json`;
