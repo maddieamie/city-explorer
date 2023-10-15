@@ -15,7 +15,7 @@ Currently, two official plugins are available:
 ## City Explorer Class Lab
 
 **Author**: Maddie Lewis
-**Version**: 1.0.0 for Lab 06
+**Version**: 1.0.2 for Lab 06
 
 ## Overview
 
@@ -34,6 +34,7 @@ This app was built in Vite React App, with Axios. It also utilizes the React Boo
 
 10-12-2023 20:00  - Application now has a fully-functional express server, with a GET route for the location resource.
 10-14-2023 12:30  - Application ReadME updated with diagram and information. 
+10-14-2023 17:11 - Application is now updated with map, CSS, and error display for lab 06.
 
 ## Credit and Collaborations
 
@@ -71,15 +72,15 @@ Actual time needed to complete: 5 hours
 
 --
 
-Name of feature: Set up the App
+Name of feature: Maps, CSS, and Errors
 
-Estimate of time needed to complete: _____
+Estimate of time needed to complete: 4 hours
 
-Start time: _____
+Start time: 13:00
 
-Finish time: _____
+Finish time: 17:00
 
-Actual time needed to complete: _____
+Actual time needed to complete: 3 hours
 
 ---
 
