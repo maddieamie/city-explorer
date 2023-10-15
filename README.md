@@ -30,7 +30,6 @@ In order for this application to run, you will need to install Vite, React Boots
 This app was built in Vite React App, with Axios. It also utilizes the React Bootstrap library. LocationIQ provided the API response data. 
 
 ## Change Log
-<!-- Use this area to document the iterative changes made to your application as each feature is successfully implemented. Use time stamps. Here's an example:
 
 10-12-2023 20:00  - Application now has a fully-functional express server, with a GET route for the location resource.
 10-14-2023 12:30  - Application ReadME updated with diagram and information. 
