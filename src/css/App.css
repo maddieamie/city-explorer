@@ -1,42 +1,50 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
+#jade {
+  background-color: rgb(241, 245, 217);
+  font-size: 1.5rem;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  
+ 
+}
+#blah {
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  color:darkseagreen;
+  line-height: 5rem;
+  font-size: 6rem;
+  padding: 0.5rem;
+}
+
+body {
+  background-color: rgb(241, 245, 217);
+  display: flex;
+  align-content: space-around;
+  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: space-around;
   padding: 2rem;
-  text-align: center;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+#formy {
+  min-width: 8rem;
+  padding: 2rem;
+  margin-bottom: 1.5rem;
+  font-size: 3rem;
+  font-family: Helvetica, sans-serif;
+  color:slategray;
+
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+#lil {
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  text-transform: uppercase;
+  font-size: 3rem;
+  color: whitesmoke;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+#map {
+  padding-bottom: 50px;
+  padding-top: 30px;
+  padding-left: 20px;
 }
 
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
-}
+.btn-info { background-color: #20c997; }
