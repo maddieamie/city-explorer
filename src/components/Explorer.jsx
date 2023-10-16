@@ -1,5 +1,6 @@
 import React from "react";
 import { Button, Container, Form, ListGroup, Image, Alert} from "react-bootstrap";
+import Weather from "./Weather.jsx";
 import axios from "axios";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -14,6 +15,7 @@ class Explorer extends React.Component {
       city: {},
       mapurl: '',
       error: null
+      
     }
   }
 // yay 
@@ -30,6 +32,8 @@ class Explorer extends React.Component {
       
       const mapurl = `https://maps.locationiq.com/v3/staticmap?key=${API}&center=${cityData.lat},${cityData.lon}&zoom=11&size=450x450&format=json&maptype=png&markers=icon:small-purple-cutout|${cityData.lat},${cityData.lon}`;
       this.setState({ mapurl }); 
+
+      
     })
     .catch(error => {
       console.error('Error:', error);
@@ -48,7 +52,7 @@ class Explorer extends React.Component {
         <div>
         <Form onSubmit={this.handleSearch}>
         <Form.Control  id= "formy" onChange={(e) => this.setState({ searchQuery: e.target.value })} type="text" placeholder="Enter city...." size="lg" variant="info" />
-        <div class="d-grid">
+        <div className="d-grid">
         <Button type='submit' variant="info" size="lg" id="lil">Explore!</Button>
         </div>
         
@@ -79,6 +83,15 @@ class Explorer extends React.Component {
         </Alert>
         </div>
       )}
+
+      
+      </Container>
+
+      <Container id="orange" >
+      <Weather 
+        searchQuery={this.state.searchQuery}
+        lon={this.state.city.lon}
+        lat={this.state.city.lat} />
 
       </Container>
       
