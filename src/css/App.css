@@ -5,6 +5,13 @@
   
  
 }
+
+#wtable { 
+font-size: 1.5rem;
+font-family: Verdana, Geneva, Tahoma, sans-serif;
+ color:honeydew;
+}
+
 #blah {
   font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
   color:darkseagreen;
@@ -41,17 +48,30 @@ body {
   color: whitesmoke;
 }
 
-#weather {
-  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-  text-transform: uppercase;
-  font-size: 3rem;
-  color: whitesmoke;
-}
-
 #map {
   padding-bottom: 50px;
   padding-top: 30px;
   padding-left: 20px;
+}
+
+#extras {
+  padding-top: 30px;
+  padding-bottom: 50px;
+  align-content: center;
+}
+
+#weatherbutton{
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  text-transform: uppercase;
+  font-size: 1.5rem;
+  color: whitesmoke;
+}
+
+#moviebutton {
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  text-transform: uppercase;
+  font-size: 1.5rem;
+  color: whitesmoke;
 }
 
 .btn-info { background-color: #20c997; }
