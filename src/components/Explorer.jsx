@@ -7,7 +7,6 @@ import Weather from './Weather.jsx';
 import axios from "axios";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-let API = import.meta.env.VITE_LOCATIONIQ_API_KEY;
 
 class Explorer extends React.Component {
   constructor(props) {
@@ -24,25 +23,29 @@ class Explorer extends React.Component {
       Forecast: {}
     }
   }
-// yay 
-handleSearch = async (e) => {
-  e.preventDefault();
-  let url = `https://us1.locationiq.com/v1/search?key=${API}&q=${this.state.searchQuery}&format=json`;
 
-  axios.get(url)
-    .then(response => {
-      const cityData = response.data[0];
+  handleSearch = async (e) => {
+    e.preventDefault();
 
-      this.setState({ city: cityData, lat: cityData.lat, lon: cityData.lon, displayCity: true, error: null });
+    const { searchQuery } = this.state;
 
-      const mapurl = `https://maps.locationiq.com/v3/staticmap?key=${API}&center=${cityData.lat},${cityData.lon}&zoom=11&size=450x450&format=json&maptype=png&markers=icon:small-purple-cutout|${cityData.lat},${cityData.lon}`;
-      this.setState({ mapurl }); 
-    })
-    .catch(error => {
-      console.error('Error:', error);
-      this.setState({ error: `An error occurred: ${error.message}. Code: ${error.code}.` })
-    });
-}
+    // Make the API request to the server (backend) to avoid exposing the key
+    await axios.get(`${import.meta.env.VITE_SERVER}api/location?searchQuery=${searchQuery}`)
+
+      .then(response => {
+        const cityData = response.data[0];
+
+        this.setState({ city: cityData, lat: cityData.lat, lon: cityData.lon, displayCity: true, error: null });
+
+        const mapurl = `https://maps.locationiq.com/v3/staticmap?key=${cityData.mapKey}&center=${cityData.lat},${cityData.lon}&zoom=11&size=450x450&format=json&maptype=png&markers=icon:small-purple-cutout|${cityData.lat},${cityData.lon}`;
+        this.setState({ mapurl });
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        this.setState({ error: `An error occurred: ${error.message}. Code: ${error.code}.` });
+      });
+  }
+
 
 showList = async () => {
   try {
