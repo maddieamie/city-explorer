@@ -30,7 +30,7 @@ class Explorer extends React.Component {
     const { searchQuery } = this.state;
 
     // Make the API request to the server (backend) to avoid exposing the key
-    await axios.get(`${import.meta.env.VITE_SERVER}api/location?searchQuery=${searchQuery}`)
+    await axios.get(`${import.meta.env.VITE_SERVER}/api/location?searchQuery=${searchQuery}`)
 
       .then(response => {
         const cityData = response.data[0];
@@ -52,7 +52,7 @@ showList = async () => {
     const { searchQuery } = this.state;
     const { lon, lat } = this.state.city;
 
-    const res = await axios.get(`${import.meta.env.VITE_SERVER}weather?searchQuery=${searchQuery}&lon=${lon}&lat=${lat}`);
+    const res = await axios.get(`${import.meta.env.VITE_SERVER}/weather?searchQuery=${searchQuery}&lon=${lon}&lat=${lat}`);
     console.log(res);
     
     this.setState({ Forecast: res.data, displayWeather: true, error: null });
