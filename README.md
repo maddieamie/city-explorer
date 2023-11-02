@@ -12,6 +12,13 @@ Currently, two official plugins are available:
 ![webresponserequest](https://github.com/maddieamie/city-explorer/assets/118625447/8019bbfa-3406-47a5-a641-5022edbf8418)
 
 
+## Lab 07 Data Flow
+
+I've made some adjustments to move my LocationIQ Requests to the back-end server. 
+
+![Lab07 Diagram](https://github.com/maddieamie/city-explorer/assets/118625447/240afc3d-d0b4-4b60-91f4-7be64afe4a97)
+
+
 ## City Explorer Class Lab
 
 **Author**: Maddie Lewis
