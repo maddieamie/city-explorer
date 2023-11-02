@@ -24,21 +24,23 @@ class Explorer extends React.Component {
     }
   }
 
-  handleSearch = async (e) => {
+  handleSearch = (e) => {
     e.preventDefault();
 
     const { searchQuery } = this.state;
 
     // Make the API request to the server (backend) to avoid exposing the key
-    await axios.get(`${import.meta.env.VITE_SERVER}/api/location?searchQuery=${searchQuery}`)
+    axios.get(`${import.meta.env.VITE_SERVER}/api/location?searchQuery=${searchQuery}`)
 
-      .then(response => {
+      .then( async (response) => {
         const cityData = response.data[0];
-
+        console.log('CityData:', cityData);
         this.setState({ city: cityData, lat: cityData.lat, lon: cityData.lon, displayCity: true, error: null });
 
-        const mapurl = `https://maps.locationiq.com/v3/staticmap?key=${cityData.mapKey}&center=${cityData.lat},${cityData.lon}&zoom=11&size=450x450&format=json&maptype=png&markers=icon:small-purple-cutout|${cityData.lat},${cityData.lon}`;
-        this.setState({ mapurl });
+        const mapurlResponse = await axios.get(`${import.meta.env.VITE_SERVER}/api/mapurl?lat=${cityData.lat}&lon=${cityData.lon}`);
+        const mapurl =mapurlResponse.data.mapurl; 
+        console.log(mapurl);
+         this.setState({ mapurl });
       })
       .catch(error => {
         console.error('Error:', error);
