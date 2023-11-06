@@ -5,6 +5,7 @@ import CityForm from './CityForm.jsx';
 import Listy from './Listy.jsx';
 import AlertComp from './AlertComp.jsx';
 import Weather from './Weather.jsx';
+import MovieCards from "./MovieCards.jsx";
 import axios from "axios";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -14,13 +15,16 @@ class Explorer extends React.Component {
     this.state = {
       displayCity: false,
       displayWeather: false,
+      displayMovies: false,
       searchQuery: '',
       city: {},
       lat: '',
       lon: '',
-      mapurl: '',
+      code: '',
+      mapurl: {},
       error: null,
-      Forecast: {}
+      Forecast: {},
+      Movies: {}
     }
   }
 
@@ -29,16 +33,17 @@ class Explorer extends React.Component {
 
     const { searchQuery } = this.state;
     const serverURL = import.meta.env.VITE_SERVER || 'http://localhost:3001';
+   
 
     // Make the API request to the server (backend) to avoid exposing the key
     axios.get(`${serverURL}/api/location?searchQuery=${searchQuery}`)
       .then(async (response) => {
         const cityData = response.data[0];
         console.log('CityData:', cityData);
-        this.setState({ city: cityData, lat: cityData.lat, lon: cityData.lon, displayCity: true, error: null });
+        this.setState({ city: cityData, lat: cityData.lat, lon: cityData.lon, code: cityData.address.country_code, displayCity: true, error: null });
 
         const mapurlResponse = await axios.get(`${serverURL}/api/mapurl?lat=${cityData.lat}&lon=${cityData.lon}`);
-        const mapurl = mapurlResponse.data.mapurl;
+        const mapurl = mapurlResponse.data;
         console.log(mapurl);
         this.setState({ mapurl });
       })
@@ -62,6 +67,37 @@ class Explorer extends React.Component {
       this.setState({ error: `An error occurred: ${error.message}. Code: ${error.code}.` });
     }
   }
+
+  showListWB = () => {
+    const { city: { lon, lat } } = this.state;
+    const serverURL = import.meta.env.VITE_SERVER || 'http://localhost:3001';
+  
+    axios.get(`${serverURL}/weatherbits?lon=${lon}&lat=${lat}`)
+      .then((res) => {
+        console.log(res);
+        this.setState({ Forecast: res.data, displayWeather: true, displayMovies: false, error: null });
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+        this.setState({ error: `An error occurred: ${error.message}. Code: ${error.code}.` });
+      });
+  }
+  
+  showListMovies = () => {
+    const { code } = this.state;
+    const serverURL = import.meta.env.VITE_SERVER || 'http://localhost:3001';
+  
+    axios.get(`${serverURL}/movies?code=${code}`)
+      .then((res) => {
+        console.log(res);
+        this.setState({ Movies: res.data, displayWeather: false, displayMovies: true, error: null });
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+        this.setState({ error: `An error occurred: ${error.message}. Code: ${error.code}.` });
+      });
+  }
+  
 
   handleInputChange = async (e) => {
     this.setState({ searchQuery: e.target.value });
@@ -93,12 +129,24 @@ class Explorer extends React.Component {
 
         <Container id="extras">
           <div className="btn-group" id="extrasearch" role="group">
-            <Button variant="info" size="md" id="weatherbutton" onClick={this.showList}>Show me my Forecast.</Button>
-            <Button variant='info' size="md" id="moviebutton" > Show me movies! </Button>
+            <Button variant="info" size="md" id="weatherbutton" onClick={this.showListWB}>Show me my Forecast.</Button>
+            <Button variant='info' size="md" id="moviebutton" onClick={this.showListMovies} > Show me movies! </Button>
           </div>
 
           {this.state.displayWeather && (
             <Weather Forecast={this.state.Forecast} />
+          )}
+
+          {this.state.displayMovies && (
+            <MovieCards 
+            Movies={this.state.Movies}
+            code={this.state.code} />
+          )}
+
+          {this.state.error && (
+            <AlertComp
+              errormessage={this.state.error}
+            />
           )}
         </Container>
       </>
