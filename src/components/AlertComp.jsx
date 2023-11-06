@@ -8,7 +8,7 @@ export default class AlertComp extends Component{
             <>
            <div>
           <Alert variant="danger">
-        Oh no! {this.props.errormessage} Please try again by typing in a city in the US.
+        Oh no! {this.props.errormessage} Looks like something went wrong. 
         </Alert>
         </div> 
             </>
