@@ -43,7 +43,7 @@ class Explorer extends React.Component {
 
         const mapurlResponse = await axios.get(`${serverURL}/api/mapurl?lat=${cityData.lat}&lon=${cityData.lon}`);
         const mapurl = mapurlResponse.data;
-        console.log(mapurl);
+        
         this.setState({ mapurl });
       })
       .catch(error => {
@@ -86,7 +86,7 @@ class Explorer extends React.Component {
     const { searchQuery } = this.state;
     const serverURL = import.meta.env.VITE_SERVER || 'http://localhost:3001';
   
-    axios.get(`${serverURL}/movies?code=${searchQuery}`)
+    axios.get(`${serverURL}/movies?q=${searchQuery}`)
       .then((res) => {
         console.log(res);
         this.setState({ Movies: res.data, displayWeather: false, displayMovies: true, error: null });
