@@ -20,7 +20,6 @@ class Explorer extends React.Component {
       city: {},
       lat: '',
       lon: '',
-      code: '',
       mapurl: {},
       error: null,
       Forecast: {},
@@ -84,10 +83,10 @@ class Explorer extends React.Component {
   }
   
   showListMovies = () => {
-    const { code } = this.state;
+    const { searchQuery } = this.state;
     const serverURL = import.meta.env.VITE_SERVER || 'http://localhost:3001';
   
-    axios.get(`${serverURL}/movies?code=${code}`)
+    axios.get(`${serverURL}/movies?code=${searchQuery}`)
       .then((res) => {
         console.log(res);
         this.setState({ Movies: res.data, displayWeather: false, displayMovies: true, error: null });
