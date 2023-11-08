@@ -6,6 +6,7 @@ import Listy from './Listy.jsx';
 import AlertComp from './AlertComp.jsx';
 import Weather from './Weather.jsx';
 import MovieCards from "./MovieCards.jsx";
+import FoodList from "./FoodList.jsx";
 import axios from "axios";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -16,6 +17,7 @@ class Explorer extends React.Component {
       displayCity: false,
       displayWeather: false,
       displayMovies: false,
+      displayFood: false,
       searchQuery: '',
       city: {},
       lat: '',
@@ -23,7 +25,8 @@ class Explorer extends React.Component {
       mapurl: {},
       error: null,
       Forecast: {},
-      Movies: {}
+      Movies: {},
+      Food: {}
     }
   }
 
@@ -74,7 +77,7 @@ class Explorer extends React.Component {
     axios.get(`${serverURL}/weatherbits?lon=${lon}&lat=${lat}`)
       .then((res) => {
         console.log(res);
-        this.setState({ Forecast: res.data, displayWeather: true, displayMovies: false, error: null });
+        this.setState({ Forecast: res.data, displayWeather: true, displayMovies: false, displayFood: false, error: null });
       })
       .catch((error) => {
         console.error('Error:', error);
@@ -89,7 +92,22 @@ class Explorer extends React.Component {
     axios.get(`${serverURL}/movies?q=${searchQuery}`)
       .then((res) => {
         console.log(res);
-        this.setState({ Movies: res.data, displayWeather: false, displayMovies: true, error: null });
+        this.setState({ Movies: res.data, displayWeather: false, displayFood: false, displayMovies: true, error: null });
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+        this.setState({ error: `An error occurred: ${error.message}. Code: ${error.code}.` });
+      });
+  }
+
+  showListFood = () => {
+    const { lat, lon } = this.state;
+    const serverURL = import.meta.env.VITE_SERVER || 'http://localhost:3001';
+  
+    axios.get(`${serverURL}/food?lon=${lon}&lat=${lat}`)
+      .then((res) => {
+        console.log(res);
+        this.setState({ Food: res.data, displayWeather: false, displayMovies: false, displayFood: true, error: null });
       })
       .catch((error) => {
         console.error('Error:', error);
@@ -130,6 +148,7 @@ class Explorer extends React.Component {
           <div className="btn-group" id="extrasearch" role="group">
             <Button variant="info" size="md" id="weatherbutton" onClick={this.showListWB}>Show me my Forecast.</Button>
             <Button variant='info' size="md" id="moviebutton" onClick={this.showListMovies} > Show me movies! </Button>
+            <Button variant='info' size="md" id="foodbutton" onClick={this.showListFood} > Show me restaurants! </Button>
           </div>
 
           {this.state.displayWeather && (
@@ -138,8 +157,11 @@ class Explorer extends React.Component {
 
           {this.state.displayMovies && (
             <MovieCards 
-            Movies={this.state.Movies}
-            code={this.state.code} />
+            Movies={this.state.Movies} />
+          )}
+
+            {this.state.displayFood && (
+            <FoodList Food={this.state.Food} />
           )}
 
           {this.state.error && (
