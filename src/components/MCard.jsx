@@ -3,7 +3,7 @@ import { Card, ListGroup} from 'react-bootstrap';
 
 export default function MovieCard({ movie }) {
     return (
-            <Card style={{ variant: "light", border: "info" }}>
+            <Card className="card border-warning mb-3"  id="moviecard">
                 <Card.Img variant="top" src={`http://image.tmdb.org/t/p/w400/${movie.poster}`} />
                 <Card.Body>
                   <Card.Title>Title: {movie.title}</Card.Title>

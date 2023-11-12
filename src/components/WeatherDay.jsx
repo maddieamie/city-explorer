@@ -4,9 +4,9 @@ import { Table } from 'react-bootstrap';
 export default function WeatherDay({ day }) {
   return (
     <div className="weather-days">
-      <Table striped bordered hover variant="light" id="wtable">
+      <Table striped variant="light" id="wtable">
         <thead>
-          <tr>
+          <tr className="table-info">
             <th>Date: {day.date}</th>
             <th>{day.temp} °C</th>
           </tr>
