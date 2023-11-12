@@ -22,11 +22,16 @@ I've made some adjustments to move my LocationIQ Requests to the back-end server
 
 ![lab08](https://github.com/maddieamie/city-explorer/assets/118625447/62a31743-4583-4f8d-927a-a8c482ed4ca6)
 
+## Lab 10 Stack drawing
+
+![Stack](https://github.com/maddieamie/city-explorer/assets/118625447/316c5394-f83f-4c32-b881-7e217d694300)
+
+
 
 ## City Explorer Class Lab
 
 **Author**: Maddie Lewis
-**Version**: 1.0.5 for Lab 09
+**Version**: 1.0.6 for Lab 10
 
 ## Overview
 
@@ -66,7 +71,8 @@ See the list of installed packages below:
 + 10-14-2023 17:11 - Application is now updated with map, CSS, and error display for lab 06.
 + 11-02-2023 14:23 - Application now has a working map display, it's own server to respond back to in order to hide API keys, a Weather component, and error handling.
 + 11-06-2023 17:00 - Application has weather data from a different API, movie data, and production server set up.
-+ 11-07-2023 14.20 - Application is more modular for future functionality. 
++ 11-07-2023 14.20 - Application is more modular for future functionality.
++ 11-11-2023 18.00 - Application is now able to request data from server caches, and make requests for restaurants open now in the query city.
 
 ## Credit and Collaborations
 
@@ -194,5 +200,16 @@ Start time: 13:00
 Finish time: 14:20
 
 Actual time needed to complete: 1.5 hours
+
+---
+Name of feature: Make Yelp Call
+
+Estimate of time needed to complete: 2 hours
+
+Start time: 15:00
+
+Finish time: 16:00
+
+Actual time needed to complete: 1 hours
 
 ---
