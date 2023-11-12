@@ -41,7 +41,8 @@ class Explorer extends React.Component {
     axios.get(`${serverURL}/api/location?searchQuery=${searchQuery}`)
       .then(async (response) => {
         const cityData = response.data[0];
-        console.log('CityData:', cityData);
+        //console.log('CityData:', cityData);
+        console.log(response.data.timestamp);
         this.setState({ city: cityData, lat: cityData.lat, lon: cityData.lon, code: cityData.address.country_code, displayCity: true, error: null });
 
         const mapurlResponse = await axios.get(`${serverURL}/api/mapurl?lat=${cityData.lat}&lon=${cityData.lon}`);
@@ -61,7 +62,7 @@ class Explorer extends React.Component {
       const serverURL = import.meta.env.VITE_SERVER || 'http://localhost:3001';
 
       const res = await axios.get(`${serverURL}/weather?searchQuery=${searchQuery}&lon=${lon}&lat=${lat}`);
-      console.log(res);
+      //console.log(res);
 
       this.setState({ Forecast: res.data, displayWeather: true, error: null });
     } catch (error) {
@@ -76,7 +77,7 @@ class Explorer extends React.Component {
   
     axios.get(`${serverURL}/weatherbits?lon=${lon}&lat=${lat}`)
       .then((res) => {
-        console.log(res);
+        //console.log(res);
         this.setState({ Forecast: res.data, displayWeather: true, displayMovies: false, displayFood: false, error: null });
       })
       .catch((error) => {
@@ -91,7 +92,7 @@ class Explorer extends React.Component {
   
     axios.get(`${serverURL}/movies?q=${searchQuery}`)
       .then((res) => {
-        console.log(res);
+        //console.log(res);
         this.setState({ Movies: res.data, displayWeather: false, displayFood: false, displayMovies: true, error: null });
       })
       .catch((error) => {
@@ -106,7 +107,7 @@ class Explorer extends React.Component {
   
     axios.get(`${serverURL}/food?lon=${lon}&lat=${lat}`)
       .then((res) => {
-        console.log(res);
+        //console.log(res);
         this.setState({ Food: res.data, displayWeather: false, displayMovies: false, displayFood: true, error: null });
       })
       .catch((error) => {
